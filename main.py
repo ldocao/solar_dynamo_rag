@@ -1,9 +1,27 @@
+"""
+- très très rapide de faire un premier POC 
+- très sensible au fait qu'il ne puisse pas parser tous les documents (j'avais un docx et RTF), pas de message d'erreur, il faut commencer avec seulement quelques documents dont on est sur que ca fonctionne
+- il est capable de parser des types de pdf très différents (images et texte), car j'avais des fichiers qui datent de 1990
+- possibilité de choisir l'embedding, la distance treshold, chunk size et overlap
+- tres peu de doc, par exemple je voulais changer le type de distance pour faire le retrieval (euclidean) mais j'ai pas trouvé. Meme si de base, le cosine distance est celui qu'il faut utiliser avec les embedding preconstruits
+- algorithmes de recherche dans les vector database:
+    - a priori, il faudrait calculer le produit entre le vecteur input et tous les vecteurs de la base
+    - locally sensitive hashing
+    - partitionnement spatial ou pre calcul avec du K means clustering
+    - product quantization
+    - approximate nearest neighbors: hierarchical navigable small world (HNSW)
+
+- possibilité de brancher le vector database que tu veux entre pinecone et weaviate
+- dans l'exemple de base RAG ManagedDB, on ne voit la database nulle part, vraiment juste pour faire du POC
+- je dois reinitialiser le vector database a chaque fois avec le RAG ManagedDB, d'où le fait que ce ne soit pas production ready
+"""
+
 from vertexai import rag
 from vertexai.generative_models import GenerativeModel, Tool
 import vertexai
 
 
-PROMPT = "Which articles have been written by Yoshimura ?"
+PROMPT = "What is an alpha dynamo? Give me an extended answer of at least 200 words with equations"
 
 
 PROJECT_ID = "long-456911"
